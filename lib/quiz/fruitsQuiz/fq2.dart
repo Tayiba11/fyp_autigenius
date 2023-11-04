@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fyp1/quiz/fruitsQuiz/fc2.dart';
-import 'package:fyp1/quiz/fruitsQuiz/fw2.dart';
+import 'package:fyp1/quiz/fruitsQuiz/fq3.dart';
+import 'package:fyp1/quiz/wrong-correct/correct.dart';
+import 'package:fyp1/quiz/wrong-correct/wrong.dart';
 
-
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: fruitstsq2(),
-    );
-  }
-}
 
 class fruitstsq2 extends StatelessWidget {
   @override
@@ -71,7 +58,21 @@ class fruitstsq2 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitWrong2Screen()));
+                    WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Strawberry",
+                      question: "Grapes",
+                      status: "Wrong",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -86,8 +87,21 @@ class fruitstsq2 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitWrong2Screen()));
-                  },
+  WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Banana",
+                      question: "Grapes",
+                      status: "Wrong",
+                    );                  },
                   child: Container(
                     width: 140,
                     child: CardBoxWithImage(
@@ -106,7 +120,21 @@ class fruitstsq2 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitWrong2Screen()));
+                      WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Orange",
+                      question: "Grapes",
+                      status: "Wrong",
+                    );
                   },
                   child:Container(
                     width: 140,
@@ -121,7 +149,21 @@ class fruitstsq2 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitCorrect2Screen()));
+                      CorrectScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Grapes",
+                      question: "Grapes",
+                      status: "Correct",
+                    );
                   },
                   child: Container(
                     width: 140,

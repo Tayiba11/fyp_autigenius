@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fyp1/quiz/vegetablesQuiz/vegc2.dart';
-import 'package:fyp1/quiz/vegetablesQuiz/vegw2.dart';
+import 'package:fyp1/quiz/vegetablesQuiz/vegq3.dart';
+import 'package:fyp1/quiz/wrong-correct/correct.dart';
+import 'package:fyp1/quiz/wrong-correct/wrong.dart';
 
-
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: vegq2(),
-    );
-  }
-}
 
 class vegq2 extends StatelessWidget {
   @override
@@ -70,8 +57,23 @@ class vegq2 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkWell(
+
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableCorrect2Screen()));
+                        CorrectScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Onion",
+                      question: "Onion",
+                      status: "Correct",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -86,7 +88,21 @@ class vegq2 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableWrong2Screen()));
+                         WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Bringle",
+                      question: "Onion",
+                      status: "Wrong",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -106,7 +122,22 @@ class vegq2 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableWrong2Screen()));
+                        WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Cabbage",
+                      question: "Onion",
+                      status: "Wrong",
+                    );
+
                   },
                   child:Container(
                     width: 140,

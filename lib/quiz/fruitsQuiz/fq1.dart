@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
-import 'fc1.dart';
-import 'fw1.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: fruitsq1(),
-    );
-  }
-}
+import 'package:fyp1/quiz/fruitsQuiz/fq2.dart';
+import 'package:fyp1/quiz/wrong-correct/correct.dart';
+import 'package:fyp1/quiz/wrong-correct/wrong.dart';
 
 class fruitsq1 extends StatelessWidget {
   @override
@@ -69,7 +57,23 @@ class fruitsq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitWrongAnswerScreen()));
+                    WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitstsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Fruit",
+                      answer: "Mango",
+                      question: "Apple",
+                      status: "Wrong",
+                    );
+
+
                   },
                   child: Container(
                     width: 140,
@@ -84,7 +88,22 @@ class fruitsq1 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitCorrectAnswerScreen()));
+
+                            CorrectScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitstsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Fruit",
+                      answer: "Apple",
+                      question: "Apple",
+                      status: "Correct",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -104,9 +123,23 @@ class fruitsq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitWrongAnswerScreen()));
+                    WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitstsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Grapes",
+                      question: "Apple",
+                      status: "Wrong",
+                    );
                   },
-                  child:Container(
+                  child: Container(
                     width: 140,
                     child: CardBoxWithImage(
                       cardColor: Color(0xFF9867C5),
@@ -119,7 +152,22 @@ class fruitsq1 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitWrongAnswerScreen()));
+                 
+                            WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitstsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Peach",
+                      question: "Apple",
+                      status: "Wrong",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -171,11 +219,11 @@ class CardBoxWithImage extends StatelessWidget {
           child: Center(
             child: imageAssetPath != null
                 ? Image.asset(
-              imageAssetPath!,
-              width: imageWidth,
-              height: imageHeight,
-              fit: BoxFit.cover,
-            )
+                    imageAssetPath!,
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: BoxFit.cover,
+                  )
                 : Placeholder(),
           ),
         ),

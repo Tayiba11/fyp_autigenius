@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fyp1/quiz/fruitsQuiz/fq2.dart';
 
-class MyWidget extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
 class CorrectScreen extends StatelessWidget {
-    final buttonfuncnext ;
+  final buttonfuncnext;
+  final username;
+  final catename;
+  final question;
+  final answer;
+  final status;
 
-    const CorrectScreen({super.key,required this.buttonfuncnext});
+  const CorrectScreen(
+      {super.key, required this.buttonfuncnext, required this.username,required  this.catename,required  this.question,required  this.answer,required  this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +41,7 @@ class CorrectScreen extends StatelessWidget {
             SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => fruitstsq2(),
-                  ),
-                );
+               buttonfuncnext();
               },
               style: ElevatedButton.styleFrom(
                 primary: Color(0xFFA881AF),

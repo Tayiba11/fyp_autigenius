@@ -1,21 +1,17 @@
+
 import 'package:flutter/material.dart';
-import 'package:fyp1/quiz/fruitsQuiz/fq3.dart';
 
+class FinishScreen extends StatelessWidget {
+  final buttonfuncnext;
+  final username;
+  final catename;
+  final question;
+  final answer;
+  final status;
 
-void main() {
-  runApp(MyApp());
-}
+  const FinishScreen(
+      {super.key, required this.buttonfuncnext, required this.username,required  this.catename,required  this.question,required  this.answer,required  this.status});
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FruitWrong2Screen(),
-    );
-  }
-}
-
-class FruitWrong2Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +27,7 @@ class FruitWrong2Screen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Wrong Answer",
+              "Correct Answer",
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -39,19 +35,19 @@ class FruitWrong2Screen extends StatelessWidget {
               ),
             ),
             Image.network(
-              'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDlsNzdnMGZ6cDNnM3JqeTV3eXpvZmRwN3ZudmFzYmI0cWI1YzMyNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgEYXCNqPZnqMuY/giphy.gif',
+              'https://www.icegif.com/wp-content/uploads/2023/04/icegif-813.gif',
               fit: BoxFit.cover,
             ),
             SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => fruitsq3(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => alphabetsq3(),
+                //   ),
+                // );
               },
               style: ElevatedButton.styleFrom(
                 primary: Color(0xFFA881AF),
@@ -62,7 +58,7 @@ class FruitWrong2Screen extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Next',
+                'Finish',
                 style: TextStyle(fontSize: 22),
               ),
             ),

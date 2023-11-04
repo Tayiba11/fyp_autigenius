@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:fyp1/quiz/fruitsQuiz/fq2.dart';
 
 class WrongScreen extends StatelessWidget {
+  final buttonfuncnext;
+  final username;
+  final catename;
+  final question;
+  final answer;
+  final status;
+
+  const WrongScreen(
+      {super.key,
+      required this.buttonfuncnext,
+      required this.username,
+      required this.catename,
+      required this.question,
+      required this.answer,
+      required this.status});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +29,8 @@ class WrongScreen extends StatelessWidget {
             colors: [Color(0xFFB98EFF), Colors.white],
           ),
         ),
-        child: Column( // Wrap the Image and button in a Column
+        child: Column(
+          // Wrap the Image and button in a Column
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
@@ -30,13 +48,8 @@ class WrongScreen extends StatelessWidget {
             SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => fruitstsq2(),
-                  ),
-                );
+               
+              buttonfuncnext();
               },
               style: ElevatedButton.styleFrom(
                 primary: Color(0xFFA881AF),

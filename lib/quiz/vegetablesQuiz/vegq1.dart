@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fyp1/quiz/vegetablesQuiz/vegc1.dart';
-import 'package:fyp1/quiz/vegetablesQuiz/vegw1.dart';
-
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: vegq1(),
-    );
-  }
-}
+import 'package:fyp1/quiz/vegetablesQuiz/vegq2.dart';
+import 'package:fyp1/quiz/wrong-correct/correct.dart';
+import 'package:fyp1/quiz/wrong-correct/wrong.dart';
 
 class vegq1 extends StatelessWidget {
   @override
@@ -70,7 +57,21 @@ class vegq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableWrongAnswerScreen()));
+                    WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Potato",
+                      question: "Tomato",
+                      status: "Wrong",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -85,7 +86,21 @@ class vegq1 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableCorrectAnswerScreen()));
+                    CorrectScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Tomato",
+                      question: "Tomato",
+                      status: "Correct",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -105,9 +120,23 @@ class vegq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableWrongAnswerScreen()));
+                  WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Tomato",
+                      question: "Tomato",
+                      status: "Correct",
+                    );
                   },
-                  child:Container(
+                  child: Container(
                     width: 140,
                     child: CardBoxWithImage(
                       cardColor: Color(0xFF9867C5),
@@ -120,7 +149,22 @@ class vegq1 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableWrongAnswerScreen()));
+                     WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Cucumber",
+                      question: "Tomato",
+                      status: "Wrong",
+                    );
+                   
                   },
                   child: Container(
                     width: 140,
@@ -172,11 +216,11 @@ class CardBoxWithImage extends StatelessWidget {
           child: Center(
             child: imageAssetPath != null
                 ? Image.asset(
-              imageAssetPath!,
-              width: imageWidth,
-              height: imageHeight,
-              fit: BoxFit.cover,
-            )
+                    imageAssetPath!,
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: BoxFit.cover,
+                  )
                 : Placeholder(),
           ),
         ),

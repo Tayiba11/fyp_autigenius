@@ -1,23 +1,20 @@
+
 import 'package:flutter/material.dart';
-import 'package:fyp1/quiz/vegetablesQuiz/vegq3.dart';
 
-void main() {
-  runApp(MyApp());
-}
+class FinishWrongScreen extends StatelessWidget {
+  final buttonfuncnext;
+  final username;
+  final catename;
+  final question;
+  final answer;
+  final status;
 
-class MyApp extends StatelessWidget {
+  const FinishWrongScreen(
+      {super.key, required this.buttonfuncnext, required this.username,required  this.catename,required  this.question,required  this.answer,required  this.status});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: VegetableCorrect2Screen(),
-    );
-  }
-}
-
-class VegetableCorrect2Screen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -30,7 +27,7 @@ class VegetableCorrect2Screen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Correct Answer",
+              "Wrong Answer",
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -38,19 +35,19 @@ class VegetableCorrect2Screen extends StatelessWidget {
               ),
             ),
             Image.network(
-              'https://www.icegif.com/wp-content/uploads/2023/04/icegif-813.gif',
+              'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDlsNzdnMGZ6cDNnM3JqeTV3eXpvZmRwN3ZudmFzYmI0cWI1YzMyNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgEYXCNqPZnqMuY/giphy.gif',
               fit: BoxFit.cover,
             ),
             SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => vegq3(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => alphabetsq3(),
+                //   ),
+                // );
               },
               style: ElevatedButton.styleFrom(
                 primary: Color(0xFFA881AF),
@@ -61,7 +58,7 @@ class VegetableCorrect2Screen extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Next',
+                'Finish',
                 style: TextStyle(fontSize: 22),
               ),
             ),

@@ -1,22 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fyp1/quiz/fruitsQuiz/fw3.dart';
-import 'package:fyp1/quiz/vegetablesQuiz/vegc3.dart';
-import 'package:fyp1/quiz/vegetablesQuiz/vegw3.dart';
+import 'package:fyp1/quiz/wrong-correct/finish_correct.dart';
+import 'package:fyp1/quiz/wrong-correct/finish_wrong.dart';
 
 
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: vegq3(),
-    );
-  }
-}
 
 class vegq3 extends StatelessWidget {
   @override
@@ -72,7 +58,21 @@ class vegq3 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableWrong3Screen()));
+                    FinishWrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Spinach",
+                      question: "Cabbage",
+                      status: "Wrong",
+                    );              
                   },
                   child: Container(
                     width: 140,
@@ -87,7 +87,21 @@ class vegq3 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableCorrect3Screen()));
+ FinishScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Cabbage",
+                      question: "Cabbage",
+                      status: "Correct",
+                    );   
                   },
                   child: Container(
                     width: 140,
@@ -107,8 +121,21 @@ class vegq3 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableWrong3Screen()));
-                  },
+FinishWrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Potato",
+                      question: "Cabbage",
+                      status: "Wrong",
+                    );                                },
                   child:Container(
                     width: 140,
                     child: CardBoxWithImage(
@@ -122,7 +149,21 @@ class vegq3 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableWrong3Screen()));
+                    FinishWrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => vegq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Vegetable",
+                      answer: "Peas",
+                      question: "Cabbage",
+                      status: "Wrong",
+                    );              
                   },
                   child: Container(
                     width: 140,

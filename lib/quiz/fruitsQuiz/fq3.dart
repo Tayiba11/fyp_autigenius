@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fyp1/quiz/fruitsQuiz/fw3.dart';
-import 'fc3.dart';
+import 'package:fyp1/quiz/wrong-correct/correct.dart';
+import 'package:fyp1/quiz/wrong-correct/finish_correct.dart';
+import 'package:fyp1/quiz/wrong-correct/finish_wrong.dart';
 
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: fruitsq3(),
-    );
-  }
-}
 
 class fruitsq3 extends StatelessWidget {
   @override
@@ -70,7 +60,21 @@ class fruitsq3 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => fruitsCorrect3Screen()));
+                      FinishScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Coconut",
+                      question: "Coconut",
+                      status: "Correct",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -85,7 +89,22 @@ class fruitsq3 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitsWrong3Screen()));
+
+                   FinishWrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Pineapple",
+                      question: "Coconut",
+                      status: "Wrong",
+                    );
                   },
                   child: Container(
                     width: 140,
@@ -105,7 +124,21 @@ class fruitsq3 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitsWrong3Screen()));
+                        FinishWrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Watermelon",
+                      question: "Coconut",
+                      status: "Wrong",
+                    );
                   },
                   child:Container(
                     width: 140,
@@ -120,8 +153,21 @@ class fruitsq3 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FruitsWrong3Screen()));
-                  },
+  FinishWrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => fruitsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Friut",
+                      answer: "Peach",
+                      question: "Coconut",
+                      status: "Wrong",
+                    );                  },
                   child: Container(
                     width: 140,
                     child: CardBoxWithImage(
