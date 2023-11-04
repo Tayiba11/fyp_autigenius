@@ -60,7 +60,10 @@ class fruitsq3 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                      FinishScreen(
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>FinishScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -74,7 +77,8 @@ class fruitsq3 extends StatelessWidget {
                       answer: "Coconut",
                       question: "Coconut",
                       status: "Correct",
-                    );
+                   ),
+                        ) );
                   },
                   child: Container(
                     width: 140,
@@ -90,7 +94,10 @@ class fruitsq3 extends StatelessWidget {
                 InkWell(
                   onTap: () {
 
-                   FinishWrongScreen(
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>FinishWrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -104,7 +111,8 @@ class fruitsq3 extends StatelessWidget {
                       answer: "Pineapple",
                       question: "Coconut",
                       status: "Wrong",
-                    );
+                   ),
+                        ) );
                   },
                   child: Container(
                     width: 140,
@@ -124,7 +132,10 @@ class fruitsq3 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                        FinishWrongScreen(
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>FinishWrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -138,7 +149,8 @@ class fruitsq3 extends StatelessWidget {
                       answer: "Watermelon",
                       question: "Coconut",
                       status: "Wrong",
-                    );
+                   ),
+                        ) );
                   },
                   child:Container(
                     width: 140,
@@ -153,7 +165,10 @@ class fruitsq3 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-  FinishWrongScreen(
+    Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>FinishWrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -167,7 +182,8 @@ class fruitsq3 extends StatelessWidget {
                       answer: "Peach",
                       question: "Coconut",
                       status: "Wrong",
-                    );                  },
+                    ),
+                        ));                  },
                   child: Container(
                     width: 140,
                     child: CardBoxWithImage(

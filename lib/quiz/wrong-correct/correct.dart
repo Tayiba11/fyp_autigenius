@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fyp1/quiz/fruitsQuiz/fq2.dart';
 
-class CorrectScreen extends StatelessWidget {
+class  CorrectScreen extends StatelessWidget {
   final buttonfuncnext;
   final username;
   final catename;

@@ -58,7 +58,10 @@ class vegq3 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    FinishWrongScreen(
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>FinishWrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -72,7 +75,8 @@ class vegq3 extends StatelessWidget {
                       answer: "Spinach",
                       question: "Cabbage",
                       status: "Wrong",
-                    );              
+                   ),
+                        ) );              
                   },
                   child: Container(
                     width: 140,
@@ -87,7 +91,10 @@ class vegq3 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
- FinishScreen(
+   Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>FinishScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -101,7 +108,8 @@ class vegq3 extends StatelessWidget {
                       answer: "Cabbage",
                       question: "Cabbage",
                       status: "Correct",
-                    );   
+                  ),
+                        ) );   
                   },
                   child: Container(
                     width: 140,
@@ -121,7 +129,10 @@ class vegq3 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-FinishWrongScreen(
+  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>FinishWrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -135,7 +146,8 @@ FinishWrongScreen(
                       answer: "Potato",
                       question: "Cabbage",
                       status: "Wrong",
-                    );                                },
+                   ),
+                        ) );                                },
                   child:Container(
                     width: 140,
                     child: CardBoxWithImage(
@@ -149,7 +161,10 @@ FinishWrongScreen(
                 ),
                 InkWell(
                   onTap: () {
-                    FinishWrongScreen(
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>FinishWrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -163,7 +178,8 @@ FinishWrongScreen(
                       answer: "Peas",
                       question: "Cabbage",
                       status: "Wrong",
-                    );              
+                   ),
+                        ) );              
                   },
                   child: Container(
                     width: 140,

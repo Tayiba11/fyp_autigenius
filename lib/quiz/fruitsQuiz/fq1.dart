@@ -57,7 +57,10 @@ class fruitsq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    WrongScreen(
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -71,7 +74,8 @@ class fruitsq1 extends StatelessWidget {
                       answer: "Mango",
                       question: "Apple",
                       status: "Wrong",
-                    );
+                    )),
+                        );
 
 
                   },
@@ -89,7 +93,10 @@ class fruitsq1 extends StatelessWidget {
                 InkWell(
                   onTap: () {
 
-                            CorrectScreen(
+                              Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>CorrectScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -103,7 +110,8 @@ class fruitsq1 extends StatelessWidget {
                       answer: "Apple",
                       question: "Apple",
                       status: "Correct",
-                    );
+                    )),
+                        );
                   },
                   child: Container(
                     width: 140,
@@ -123,7 +131,10 @@ class fruitsq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    WrongScreen(
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -137,7 +148,8 @@ class fruitsq1 extends StatelessWidget {
                       answer: "Grapes",
                       question: "Apple",
                       status: "Wrong",
-                    );
+                    )),
+                        );
                   },
                   child: Container(
                     width: 140,
@@ -153,7 +165,10 @@ class fruitsq1 extends StatelessWidget {
                 InkWell(
                   onTap: () {
                  
-                            WrongScreen(
+                             Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -167,7 +182,8 @@ class fruitsq1 extends StatelessWidget {
                       answer: "Peach",
                       question: "Apple",
                       status: "Wrong",
-                    );
+                    )),
+                        );
                   },
                   child: Container(
                     width: 140,

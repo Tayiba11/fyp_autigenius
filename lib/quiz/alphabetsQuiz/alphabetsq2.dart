@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
-import 'ac2.dart';
-import 'aw2.dart';
-
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: alphabetsq2(),
-    );
-  }
-}
+import 'package:fyp1/quiz/alphabetsQuiz/alphabetsq3.dart';
+import 'package:fyp1/quiz/wrong-correct/correct.dart';
+import 'package:fyp1/quiz/wrong-correct/wrong.dart';
 
 class alphabetsq2 extends StatelessWidget {
   @override
@@ -70,7 +57,25 @@ class alphabetsq2 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AlphabetWrong2Screen()));
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => alphabetsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Alphabets",
+                      answer: "strawberry",
+                      question: "Grapes",
+                      status: "Wrong",
+                    )),
+                        );
                   },
                   child: Container(
                     width: 140,
@@ -85,7 +90,25 @@ class alphabetsq2 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AlphabetWrong2Screen()));
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => alphabetsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Alphabets",
+                      answer: "Banana",
+                      question: "Grapes",
+                      status: "Wrong",
+                    )),
+                        );
                   },
                   child: Container(
                     width: 140,
@@ -105,9 +128,27 @@ class alphabetsq2 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AlphabetWrong2Screen()));
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => alphabetsq3(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Alphabets",
+                      answer: "Orange",
+                      question: "Grapes",
+                      status: "Wrong",
+                    )),
+                        );
                   },
-                  child:Container(
+                  child: Container(
                     width: 140,
                     child: CardBoxWithImage(
                       cardColor: Color(0xFF9867C5),
@@ -120,7 +161,25 @@ class alphabetsq2 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => AlphabetCorrect2Screen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>CorrectScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => alphabetsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Alphabets",
+                      answer: "Grapes",
+                      question: "Grapes",
+                      status: "Wrong",
+                    )),
+                        );
                   },
                   child: Container(
                     width: 140,
@@ -172,11 +231,11 @@ class CardBoxWithImage extends StatelessWidget {
           child: Center(
             child: imageAssetPath != null
                 ? Image.asset(
-              imageAssetPath!,
-              width: imageWidth,
-              height: imageHeight,
-              fit: BoxFit.cover,
-            )
+                    imageAssetPath!,
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: BoxFit.cover,
+                  )
                 : Placeholder(),
           ),
         ),

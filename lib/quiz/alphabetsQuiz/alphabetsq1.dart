@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fyp1/quiz/alphabetsQuiz/wrong.dart';
-import 'correct.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: alphabetsq1(),
-    );
-  }
-}
+import 'package:fyp1/quiz/alphabetsQuiz/alphabetsq2.dart';
+import 'package:fyp1/quiz/wrong-correct/correct.dart';
+import 'package:fyp1/quiz/wrong-correct/wrong.dart';
 
 class alphabetsq1 extends StatelessWidget {
   @override
@@ -69,33 +57,69 @@ class alphabetsq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => WrongAnswerScreen()));
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => alphabetsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Alphabets",
+                      answer: "Mango",
+                      question: "Apple",
+                      status: "Wrong",
+                    ) ),
+                        );
                   },
-                child: Container(
-                  width: 140,
-                  child: CardBoxWithImage(
-                    cardColor: Color(0xFF9867C5),
-                    borderRadius: BorderRadius.circular(25),
-                    imageAssetPath: 'assets/images/fruits/Mango.png',
-                    imageWidth: 90,
-                    imageHeight: 80,
+                  child: Container(
+                    width: 140,
+                    child: CardBoxWithImage(
+                      cardColor: Color(0xFF9867C5),
+                      borderRadius: BorderRadius.circular(25),
+                      imageAssetPath: 'assets/images/fruits/Mango.png',
+                      imageWidth: 90,
+                      imageHeight: 80,
+                    ),
                   ),
-                ),
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CorrectAnswerScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>CorrectScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => alphabetsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Alphabets",
+                      answer: "Apple",
+                      question: "Apple",
+                      status: "Correct",
+                    ) ),
+                        );;
                   },
-                child: Container(
-                  width: 140,
-                  child: CardBoxWithImage(
-                    cardColor: Color(0xFF9867C5),
-                    borderRadius: BorderRadius.circular(25),
-                    imageAssetPath: 'assets/images/fruits/apple.png',
-                    imageWidth: 80,
-                    imageHeight: 80,
+                  child: Container(
+                    width: 140,
+                    child: CardBoxWithImage(
+                      cardColor: Color(0xFF9867C5),
+                      borderRadius: BorderRadius.circular(25),
+                      imageAssetPath: 'assets/images/fruits/apple.png',
+                      imageWidth: 80,
+                      imageHeight: 80,
+                    ),
                   ),
-                ),
                 ),
               ],
             ),
@@ -104,33 +128,69 @@ class alphabetsq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => WrongAnswerScreen()));
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => alphabetsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Alphabets",
+                      answer: "Grapes",
+                      question: "Apple",
+                      status: "Wrong",
+                    ) ),
+                        );
                   },
-                child:Container(
-                  width: 140,
-                  child: CardBoxWithImage(
-                    cardColor: Color(0xFF9867C5),
-                    borderRadius: BorderRadius.circular(25),
-                    imageAssetPath: 'assets/images/fruits/grapes.png',
-                    imageWidth: 90,
-                    imageHeight: 80,
+                  child: Container(
+                    width: 140,
+                    child: CardBoxWithImage(
+                      cardColor: Color(0xFF9867C5),
+                      borderRadius: BorderRadius.circular(25),
+                      imageAssetPath: 'assets/images/fruits/grapes.png',
+                      imageWidth: 90,
+                      imageHeight: 80,
+                    ),
                   ),
-                ),
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => WrongAnswerScreen()));
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
+                      buttonfuncnext: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => alphabetsq2(),
+                          ),
+                        );
+                      },
+                      username: "shahzeb",
+                      catename: "Alphabets",
+                      answer: "Peach",
+                      question: "Apple",
+                      status: "Wrong",
+                    )),
+                        );
                   },
-                child: Container(
-                  width: 140,
-                  child: CardBoxWithImage(
-                    cardColor: Color(0xFF9867C5),
-                    borderRadius: BorderRadius.circular(25),
-                    imageAssetPath: 'assets/images/fruits/peach.png',
-                    imageWidth: 80,
-                    imageHeight: 80,
+                  child: Container(
+                    width: 140,
+                    child: CardBoxWithImage(
+                      cardColor: Color(0xFF9867C5),
+                      borderRadius: BorderRadius.circular(25),
+                      imageAssetPath: 'assets/images/fruits/peach.png',
+                      imageWidth: 80,
+                      imageHeight: 80,
+                    ),
                   ),
-                ),
                 ),
               ],
             ),
@@ -171,11 +231,11 @@ class CardBoxWithImage extends StatelessWidget {
           child: Center(
             child: imageAssetPath != null
                 ? Image.asset(
-              imageAssetPath!,
-              width: imageWidth,
-              height: imageHeight,
-              fit: BoxFit.cover,
-            )
+                    imageAssetPath!,
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: BoxFit.cover,
+                  )
                 : Placeholder(),
           ),
         ),

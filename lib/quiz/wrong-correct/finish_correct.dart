@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class FinishScreen extends StatelessWidget {
+class   FinishScreen extends StatelessWidget {
   final buttonfuncnext;
   final username;
   final catename;

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-class FinishWrongScreen extends StatelessWidget {
+class   FinishWrongScreen extends StatelessWidget {
   final buttonfuncnext;
   final username;
   final catename;
@@ -9,7 +9,7 @@ class FinishWrongScreen extends StatelessWidget {
   final answer;
   final status;
 
-  const FinishWrongScreen(
+  const  FinishWrongScreen(
       {super.key, required this.buttonfuncnext, required this.username,required  this.catename,required  this.question,required  this.answer,required  this.status});
 
   @override

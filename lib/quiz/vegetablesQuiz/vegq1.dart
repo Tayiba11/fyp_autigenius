@@ -57,7 +57,10 @@ class vegq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    WrongScreen(
+                     Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -71,7 +74,8 @@ class vegq1 extends StatelessWidget {
                       answer: "Potato",
                       question: "Tomato",
                       status: "Wrong",
-                    );
+                    ),
+                        ));
                   },
                   child: Container(
                     width: 140,
@@ -86,7 +90,10 @@ class vegq1 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    CorrectScreen(
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>CorrectScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -100,7 +107,8 @@ class vegq1 extends StatelessWidget {
                       answer: "Tomato",
                       question: "Tomato",
                       status: "Correct",
-                    );
+                    ),
+                        ));
                   },
                   child: Container(
                     width: 140,
@@ -120,7 +128,10 @@ class vegq1 extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                  WrongScreen(
+                   Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -134,7 +145,8 @@ class vegq1 extends StatelessWidget {
                       answer: "Tomato",
                       question: "Tomato",
                       status: "Correct",
-                    );
+                    )),
+                        );
                   },
                   child: Container(
                     width: 140,
@@ -149,7 +161,10 @@ class vegq1 extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                     WrongScreen(
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>WrongScreen(
                       buttonfuncnext: () {
                         Navigator.push(
                           context,
@@ -163,7 +178,8 @@ class vegq1 extends StatelessWidget {
                       answer: "Cucumber",
                       question: "Tomato",
                       status: "Wrong",
-                    );
+                    )),
+                        );
                    
                   },
                   child: Container(
