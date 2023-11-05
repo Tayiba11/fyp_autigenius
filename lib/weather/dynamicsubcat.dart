@@ -162,32 +162,7 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                 ),
                 // Add your remaining widgets here
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to AlphabetsScreen when the container is tapped
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                snowfallScreen(), // Navigate to AlphabetsScreen
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: 140, // Adjust the width as needed
-                        child: CardBoxWithImage(
-                          cardColor: Color(0xFF9867C5),
-                          borderRadius: BorderRadius.circular(25),
-                          imageAssetPath: 'assets/images/weather/9.png',
-                          imageWidth: 60,
-                          imageHeight: 80,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                if(loading==0)...[CircularProgressIndicator()]
               ],
             ),
           ),

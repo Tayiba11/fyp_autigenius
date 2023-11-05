@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:fyp1/utils/preferencedata.dart';
 import 'package:http/http.dart' as http;
 
 class API {
@@ -176,7 +175,7 @@ class API {
       //
       var uri =
           '${baseurl}api/addsubcat';
-      var request = http.MultipartRequest('PUT', Uri.parse(uri));
+      var request = http.MultipartRequest('Post', Uri.parse(uri));
       // request.headers["authorization"] = BaseUrl.storage.read("logintoken");
       request.fields['name'] = "$name";
       request.fields['user_id'] = "user_id";
@@ -206,16 +205,17 @@ class API {
       //
       var uri =
           '${baseurl}api/addcat';
-      var request = http.MultipartRequest('PUT', Uri.parse(uri));
+      var request = http.MultipartRequest('Post', Uri.parse(uri));
       // request.headers["authorization"] = BaseUrl.storage.read("logintoken");
       request.fields['name'] = "$name";
-      request.fields['user_id'] = "user_id";
+      request.fields['user_id'] = "1";
       request.files.add(new http.MultipartFile.fromBytes(
           'image', File(photofile).readAsBytesSync(),
           filename: photofile.split("/").last));
 
       var res = await request.send();
       debugPrint("${res.statusCode}");
+      debugPrint("${res.request}");
       final response = await http.Response.fromStream(res);
 
       // debugPrint("{response.body}");

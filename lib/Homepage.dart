@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:fyp1/add_category.dart';
 import 'package:fyp1/service/api_service.dart';
 import 'package:fyp1/service/models/all_category_model.dart';
 import 'package:fyp1/weather/dynamicsubcat.dart';
@@ -25,17 +26,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  File? image;
+  // File? image;
+  XFile? image;
 
-  Future pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final imageTemp = File(image.path);
-      setState(() => this.image = imageTemp);
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
+  // Future pickImage() async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  //     if (image == null) return;
+  //     final imageTemp = File(image.path);
+  //     setState(() => this.image = imageTemp);
+  //   } on PlatformException catch (e) {
+  //     print('Failed to pick image: $e');
+  //   }
+  // }
+  Future getImagefromGallery() async {
+    image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      image = image;
+    });
   }
 
 // class MyHomePage extends StatelessWidget {
@@ -87,328 +96,354 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavBar(),
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFFB98EFF), Colors.white],
-            ),
-          ),
+      body: RefreshIndicator(
+        onRefresh: () async {
+           getcatdata();
+          // Handle the refresh action here (e.g., fetch new data)
+          // You can call an API, update data, or perform any necessary tasks
+          // Remember to use asynchronous functions when performing async operations
+
+          // Example of a delay to simulate an asynchronous operation
+          await Future.delayed(Duration(seconds: 2));
+        },
+        child: SingleChildScrollView(
           child: Container(
-            width: double.infinity,
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0, // Remove app bar shadow
-                  // leading: Padding(
-                  //   padding: const EdgeInsets.only(left: 10.0), // Add padding to the left
-                  //   child: IconButton(
-                  //     icon: Icon(Icons.menu),
-                  //     onPressed: () {
-                  //       // Handle menu button tap here
-                  //     },
-                  //   ),
-                  // ),
-                  centerTitle: true,
-                  title: Text(
-                    'Learn',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            AlphabetsScreen(), // Navigate to AlphabetsScreen
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0xFFB98EFF), Colors.white],
+              ),
+            ),
+            child: Container(
+              width: double.infinity,
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  AppBar(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0, // Remove app bar shadow
+                    // leading: Padding(
+                    //   padding: const EdgeInsets.only(left: 10.0), // Add padding to the left
+                    //   child: IconButton(
+                    //     icon: Icon(Icons.menu),
+                    //     onPressed: () {
+                    //       // Handle menu button tap here
+                    //     },
+                    //   ),
+                    // ),
+                    centerTitle: true,
+                    title: Text(
+                      'Learn',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/alphabet.png',
-                      imageWidth: 170,
-                      imageHeight: 80,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            FruitsScreen(), // Navigate to AlphabetsScreen
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AlphabetsScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/alphabet.png',
+                        imageWidth: 170,
+                        imageHeight: 80,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/fruits.png',
-                      imageWidth: 130,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            vegetablesScreen(), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              FruitsScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/fruits.png',
+                        imageWidth: 130,
+                        imageHeight: 100,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/vegetables.png',
-                      imageWidth: 170,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            animalsScreen(), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              vegetablesScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/vegetables.png',
+                        imageWidth: 170,
+                        imageHeight: 100,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/animals.png',
-                      imageWidth: 170,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            colorsScreen(), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              animalsScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/animals.png',
+                        imageWidth: 170,
+                        imageHeight: 100,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/colors.png',
-                      imageWidth: 110,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            peopleScreen(), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              colorsScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/colors.png',
+                        imageWidth: 110,
+                        imageHeight: 100,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/People.png',
-                      imageWidth: 120,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            expressionsScreen(), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              peopleScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/People.png',
+                        imageWidth: 120,
+                        imageHeight: 100,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/emogi.png',
-                      imageWidth: 170,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            professionsScreen(), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              expressionsScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/emogi.png',
+                        imageWidth: 170,
+                        imageHeight: 100,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/profession.png',
-                      imageWidth: 110,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            vehiclesScreen(), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              professionsScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/profession.png',
+                        imageWidth: 110,
+                        imageHeight: 100,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/cars.png',
-                      imageWidth: 150,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to AlphabetsScreen when the container is tapped
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            weatherScreen(), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              vehiclesScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/cars.png',
+                        imageWidth: 150,
+                        imageHeight: 100,
                       ),
-                    );
-                  },
-                  child: Container(
-                    height: 170,
-                    width: 280,
-                    child: CardBoxWithImage(
-                      cardColor: Color(0xFF9867C5),
-                      borderRadius: BorderRadius.circular(25),
-                      imageAssetPath: 'assets/images/weather.png',
-                      imageWidth: 110,
-                      imageHeight: 100,
                     ),
                   ),
-                ),
-                // datacat
-                Container(
-                  width: 280,
-                  child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: datacat.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            // Navigate to AlphabetsScreen when the container is tapped
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    DynamicSubCatScreen(name:  '${datacat[index].name}',id: '${datacat[index].id}',), // Navigate to AlphabetsScreen
+                  GestureDetector(
+                    onTap: () {
+                      // Navigate to AlphabetsScreen when the container is tapped
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              weatherScreen(), // Navigate to AlphabetsScreen
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 170,
+                      width: 280,
+                      child: CardBoxWithImage(
+                        cardColor: Color(0xFF9867C5),
+                        borderRadius: BorderRadius.circular(25),
+                        imageAssetPath: 'assets/images/weather.png',
+                        imageWidth: 110,
+                        imageHeight: 100,
+                      ),
+                    ),
+                  ),
+                  // datacat
+                  Container(
+                    width: 280,
+                    child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: datacat.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTap: () {
+                              // Navigate to AlphabetsScreen when the container is tapped
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => DynamicSubCatScreen(
+                                    name: '${datacat[index].name}',
+                                    id: '${datacat[index].id}',
+                                  ), // Navigate to AlphabetsScreen
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 170,
+                              width: 280,
+                              // child: Text("${datacat[index].image}"),
+                              child: CardBoxWithImagenet(
+                                cardColor: Color(0xFF9867C5),
+                                borderRadius: BorderRadius.circular(25),
+                                imageAssetPath: '${datacat[index].image}',
+                                imageWidth: 110,
+                                imageHeight: 100,
                               ),
-                            );
+                            ),
+                          );
+                        }),
+                  ),
+              
+                  Container(
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        // Your existing code...
+                        GestureDetector(
+                          // onTap: pickImage, // Call pickImage when tapped
+                          onTap: (){
+                                 getImagefromGallery().then((value) {
+                                          print(image!.path);
+                                          if (image != null) {
+                                           Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AddCategoryScreen(
+                                                        imagepath: image!.path,
+                                                      )),
+                                            );
+                                          } else {
+                                            Navigator.pop(context);
+                                          }
+                                        });
+                          
                           },
                           child: Container(
                             height: 170,
                             width: 280,
-                            // child: Text("${datacat[index].image}"),
-                            child: CardBoxWithImagenet(
-                              cardColor: Color(0xFF9867C5),
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
-                              imageAssetPath: '${datacat[index].image}',
-                              imageWidth: 110,
-                              imageHeight: 100,
+                              color: Color(0xFF9867C5),
                             ),
-                            
-                          ),
-                        );
-                      }),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      getcatdata();
-                    },
-                    child: Text("dss")),
-                Container(
-                  width: double.infinity,
-                  child: Column(
-                    children: [
-                      // Your existing code...
-                      GestureDetector(
-                        onTap: pickImage, // Call pickImage when tapped
-                        child: Container(
-                          height: 170,
-                          width: 280,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Color(0xFF9867C5),
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.add,
-                              size: 36,
+                            child: Center(
+                              child: Icon(
+                                Icons.add,
+                                size: 36,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                    ],
+                        SizedBox(height: 10),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -459,7 +494,6 @@ class CardBoxWithImage extends StatelessWidget {
     );
   }
 }
-
 
 class CardBoxWithImagenet extends StatelessWidget {
   final Color cardColor;
