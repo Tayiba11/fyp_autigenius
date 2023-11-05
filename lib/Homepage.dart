@@ -1,5 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:fyp1/service/api_service.dart';
+import 'package:fyp1/service/models/all_category_model.dart';
+import 'package:fyp1/weather/dynamicsubcat.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:flutter/material.dart';
@@ -34,7 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-
 // class MyHomePage extends StatelessWidget {
 //   File? image;
 //   Future pickImage() async {
@@ -47,6 +50,39 @@ class _MyHomePageState extends State<MyHomePage> {
 //       print('Failed to pick image: $e');
 //     }
 //   }
+
+  var loading = 0;
+  var datacat = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    getcatdata();
+    super.initState();
+  }
+
+  getcatdata() async {
+    print("object");
+    var response = await API.GetAllCategory();
+    if (response.statusCode == 200) {
+      print(response);
+      datacat = [];
+      // debugPrint('before model $response');
+      var responseData = jsonDecode(response.body);
+      response = AllCategoryModel.fromJson(responseData);
+      for (int i = 0; i < response.data.length; i++) {
+        datacat.add(response.data[i]);
+        print(i);
+      }
+      setState(() {
+        loading = 1;
+      });
+    } else {
+      setState(() {
+        loading = 1;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,9 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-
                 SizedBox(height: 20),
-
                 GestureDetector(
                   onTap: () {
                     // Navigate to AlphabetsScreen when the container is tapped
@@ -309,38 +343,76 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-    Container(
-    width: double.infinity,
-    child: Column(
-    children: [
-    // Your existing code...
-    GestureDetector(
-    onTap: pickImage, // Call pickImage when tapped
-    child: Container(
-    height: 170,
-    width: 280,
-    decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(25),
-    color: Color(0xFF9867C5),
-    ),
-    child: Center(
-    child: Icon(
-    Icons.add,
-    size: 36,
-    ),
-    ),
-    ),
-    ),
-                SizedBox(height: 10),
-
+                // datacat
+                Container(
+                  width: 280,
+                  child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: datacat.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: () {
+                            // Navigate to AlphabetsScreen when the container is tapped
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DynamicSubCatScreen(name:  '${datacat[index].name}',id: '${datacat[index].id}',), // Navigate to AlphabetsScreen
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 170,
+                            width: 280,
+                            // child: Text("${datacat[index].image}"),
+                            child: CardBoxWithImagenet(
+                              cardColor: Color(0xFF9867C5),
+                              borderRadius: BorderRadius.circular(25),
+                              imageAssetPath: '${datacat[index].image}',
+                              imageWidth: 110,
+                              imageHeight: 100,
+                            ),
+                            
+                          ),
+                        );
+                      }),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      getcatdata();
+                    },
+                    child: Text("dss")),
+                Container(
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      // Your existing code...
+                      GestureDetector(
+                        onTap: pickImage, // Call pickImage when tapped
+                        child: Container(
+                          height: 170,
+                          width: 280,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Color(0xFF9867C5),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.add,
+                              size: 36,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-            ],
-          ),
+        ),
       ),
-      ),
-    ),
     );
   }
 }
@@ -375,6 +447,50 @@ class CardBoxWithImage extends StatelessWidget {
           child: Center(
             child: imageAssetPath != null
                 ? Image.asset(
+                    imageAssetPath!,
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: BoxFit.cover,
+                  )
+                : Placeholder(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class CardBoxWithImagenet extends StatelessWidget {
+  final Color cardColor;
+  final BorderRadius borderRadius;
+  final String? imageAssetPath;
+  final double imageWidth;
+  final double imageHeight;
+
+  CardBoxWithImagenet({
+    required this.cardColor,
+    this.borderRadius = const BorderRadius.all(Radius.circular(8)),
+    this.imageAssetPath,
+    this.imageWidth = 150,
+    this.imageHeight = 80,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Card(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius,
+        ),
+        color: cardColor,
+        child: Container(
+          height: 100,
+          child: Center(
+            child: imageAssetPath != null
+                ? Image.network(
                     imageAssetPath!,
                     width: imageWidth,
                     height: imageHeight,
