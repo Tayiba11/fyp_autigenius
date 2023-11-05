@@ -1,18 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: naughtyScreen(),
-    );
-  }
-}
-
 class naughtyScreen extends StatefulWidget {
   @override
   _FirstScreenState createState() => _FirstScreenState();

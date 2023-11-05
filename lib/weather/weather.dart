@@ -7,19 +7,6 @@ import 'package:fyp1/weather/thunderstorm.dart';
 import 'package:fyp1/weather/tornado.dart';
 import 'package:fyp1/weather/volcanoblast.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: weatherScreen(),
-    );
-  }
-}
-
 class weatherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

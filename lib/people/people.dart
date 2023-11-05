@@ -9,19 +9,6 @@ import 'package:fyp1/people/oldman.dart';
 import 'package:fyp1/people/oldwoman.dart';
 import 'package:fyp1/people/woman.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: peopleScreen(),
-    );
-  }
-}
-
 class peopleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

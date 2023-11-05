@@ -10,18 +10,6 @@ import 'package:fyp1/colors/red.dart';
 import 'package:fyp1/colors/white.dart';
 import 'package:fyp1/colors/yellow.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: colorsScreen(),
-    );
-  }
-}
 
 class colorsScreen extends StatelessWidget {
   @override

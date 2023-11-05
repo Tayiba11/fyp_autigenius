@@ -11,18 +11,6 @@ import 'package:fyp1/fruits/watermelon.dart';
 import 'apple.dart';
 import 'banana.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FruitsScreen(),
-    );
-  }
-}
 
 class FruitsScreen extends StatelessWidget {
   @override

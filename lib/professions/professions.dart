@@ -10,19 +10,6 @@ import 'package:fyp1/professions/lawyer.dart';
 import 'package:fyp1/professions/police.dart';
 import 'package:fyp1/professions/teacher.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: professionsScreen(),
-    );
-  }
-}
-
 class professionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

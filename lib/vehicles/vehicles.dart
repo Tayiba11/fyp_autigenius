@@ -13,18 +13,6 @@ import 'package:fyp1/vehicles/train.dart';
 import 'package:fyp1/vehicles/truck.dart';
 import 'package:fyp1/vehicles/van.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: vehiclesScreen(),
-    );
-  }
-}
 
 class vehiclesScreen extends StatelessWidget {
   @override

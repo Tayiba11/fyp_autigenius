@@ -4,18 +4,6 @@ import 'package:fyp1/quiz/vegetablesQuiz/vegq1.dart';
 
 import 'alphabetsQuiz/alphabetsq1.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: categories(),
-    );
-  }
-}
 
 class categories extends StatelessWidget {
   @override

@@ -5,18 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
 
-void main() {
-  runApp(MyApp()); 
-}
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SignUpPage(),
-    );
-  }
-}
 
 class SignUpPage extends StatelessWidget {
   TextEditingController firstName = TextEditingController();

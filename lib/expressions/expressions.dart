@@ -23,19 +23,6 @@ import 'package:fyp1/expressions/tired.dart';
 
 import 'furious.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: expressionsScreen(),
-    );
-  }
-}
-
 class expressionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

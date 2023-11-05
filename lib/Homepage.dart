@@ -15,18 +15,6 @@ import 'package:fyp1/weather/weather.dart';
 import 'fruits/fruits.dart';
 import 'package:fyp1/navbar.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
