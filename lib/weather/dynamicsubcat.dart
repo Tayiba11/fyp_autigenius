@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fyp1/add_sub_category.dart';
 import 'package:fyp1/service/api_service.dart';
 import 'package:fyp1/service/models/all_sub_category_model.dart';
-
-import 'package:fyp1/weather/snowfall.dart';
+// ignore: depend_on_referenced_packages
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 
 class DynamicSubCatScreen extends StatefulWidget {
@@ -28,6 +28,22 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
       image = image;
     });
   }
+  File? audioFile;
+
+Future pickAudio() async {
+  try {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['mp3', 'wav', 'aac', 'm4a'], // Specify the audio file formats you want to allow
+    );
+
+    if (result != null) {
+      audioFile = File(result.files.single.path);
+    }
+  } catch (e) {
+    print("Error picking audio: $e");
+  }
+}
 
   @override
   void initState() {
@@ -122,57 +138,62 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                 //   )
                 // ],
                 if (datacat.length == 0) ...[
-
                   Row(
-                  mainAxisAlignment: MainAxisAlignment.start, // Align to the left
-                  children: [
-                    GestureDetector(onTap: () {
-                                  getImagefromGallery().then((value) {
-                                    print(image!.path);
-                                    if (image != null) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                AddSubCategoryScreen(
-                                                  imagepath: image!.path,
-                                                  catid:widget.id
-                                                )),
-                                      );
-                                    } else {
-                                      Navigator.pop(context);
-                                    }
-                                  });
-                                },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 25.0), // Add left padding
-                        child: Container(
-                          width: 140, // Adjust the width as needed
-                          height: 110,
-                          child: Card(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            elevation: 3,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            color: Color(0xFF9867C5),
-                            child: Container(
-                              width: 70, // Adjust the width of the inner container
-                              height: 50, // Adjust the height of the inner container
-                              child: Center(
-                                child: Icon(
-                                  Icons.add,
-                                  size: 36, // Adjust the size of the plus icon
-                                  color: Colors.white, // Set the color of the plus icon
+                    mainAxisAlignment:
+                        MainAxisAlignment.start, // Align to the left
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          getImagefromGallery().then((value) {
+                            print(image!.path);
+                            if (image != null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddSubCategoryScreen(
+                                        imagepath: image!.path,
+                                        catid: widget.id)),
+                              );
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 25.0), // Add left padding
+                          child: Container(
+                            width: 140, // Adjust the width as needed
+                            height: 110,
+                            child: Card(
+                              margin: EdgeInsets.symmetric(vertical: 10),
+                              elevation: 3,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              color: Color(0xFF9867C5),
+                              child: Container(
+                                width:
+                                    70, // Adjust the width of the inner container
+                                height:
+                                    50, // Adjust the height of the inner container
+                                child: Center(
+                                  child: Icon(
+                                    Icons.add,
+                                    size:
+                                        36, // Adjust the size of the plus icon
+                                    color: Colors
+                                        .white, // Set the color of the plus icon
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),],
+                    ],
+                  ),
+                ],
                 Container(
                   width: MediaQuery.of(context).size.width * 0.85,
                   child: GridView.builder(
@@ -185,7 +206,8 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                         ),
                     itemCount: datacat.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return datacat.length == index + 1 ? Container(
+                      return datacat.length == index + 1
+                          ? Container(
                               child: GestureDetector(
                                 onTap: () {
                                   getImagefromGallery().then((value) {
@@ -196,9 +218,8 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 AddSubCategoryScreen(
-                                                  imagepath: image!.path,                                                  catid:widget.id
-
-                                                )),
+                                                    imagepath: image!.path,
+                                                    catid: widget.id)),
                                       );
                                     } else {
                                       Navigator.pop(context);
