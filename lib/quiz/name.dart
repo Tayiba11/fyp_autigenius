@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fyp1/quiz/categories.dart';
+import 'package:fyp1/utils/Prefs.dart';
 
-class NameScreen extends StatelessWidget {
+class NameScreen extends StatelessWidget {TextEditingController textEditingControlstur= TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +40,7 @@ class NameScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: TextField(
+                child: TextField(controller:textEditingControlstur ,
                   decoration: InputDecoration(
                     hintText: 'Enter student name',
                     border: InputBorder.none,
@@ -52,12 +53,25 @@ class NameScreen extends StatelessWidget {
                 width: 100,
                 child: ElevatedButton(
                   onPressed: () {
+                    
+                    
+                    if(textEditingControlstur.text!=""){Prefs().setname(textEditingControlstur.text);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => categories(),
                       ),
-                    );
+                    );}
+                    else {
+                            const snackBar = SnackBar(
+                                                content: Text(
+                                                    'Enter Username'),
+                                              );
+
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xFFA881AF), // A881AF - Purple color

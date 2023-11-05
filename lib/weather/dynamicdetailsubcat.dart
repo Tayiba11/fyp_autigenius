@@ -2,31 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 
+class DynamicDetailSubCat extends StatefulWidget {
+  final name ;
+  final image;
+  final audio;
+     DynamicDetailSubCat({super.key,required this .name,required this .image,required this.audio});
 
-class orangeScreen extends StatefulWidget {
   @override
   _FirstScreenState createState() => _FirstScreenState();
 }
 
-class _FirstScreenState extends State<orangeScreen> {
+class _FirstScreenState extends State<DynamicDetailSubCat> {
   double imageSize = 200.0;
   double maxSize = 400.0;
 
   final player = AudioPlayer();
 
-
   void _increaseSize() {
-    print("oringae");
     setState(() {
-      // player.play(AssetSource('audio/orange.mpeg'));
       if (imageSize < maxSize) {
         imageSize += 20.0;
       } else {
         imageSize = 200.0;
       }
     });
+      player.play(UrlSource("${widget.audio}")
+        // 'https://example.com/your-audio-file.mp3'
+        ); // Replace with your audio URL
 
-    player.play(AssetSource('audio/orange.mpeg'));
+    // player.play(AssetSource('audio/snowfall.mpeg'));
   }
 
   @override
@@ -47,7 +51,7 @@ class _FirstScreenState extends State<orangeScreen> {
         ),
         centerTitle: true,
         title: Text(
-          'Orange',
+          '${widget.name}',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -72,7 +76,7 @@ class _FirstScreenState extends State<orangeScreen> {
               duration: Duration(milliseconds: 300),
               width: imageSize,
               height: imageSize,
-              child: Image.asset('assets/images/colors/10.png'), // Replace with your image
+              child: Image.network("${widget.image}"), // Replace with your image
             ),
           ),
         ),

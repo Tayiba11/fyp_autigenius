@@ -14,6 +14,9 @@ class _FirstScreenState extends State<orangeScreen> {
   final player = AudioPlayer();
 
   void _increaseSize() {
+    print(
+      "dsdsdSD"
+    );
     setState(() {
       if (imageSize < maxSize) {
         imageSize += 20.0;
@@ -22,7 +25,7 @@ class _FirstScreenState extends State<orangeScreen> {
       }
     });
 
-    player.play(AssetSource('audio/orange.mp3'));
+    player.play(AssetSource('audio/orange.mpeg'));
   }
 
   @override

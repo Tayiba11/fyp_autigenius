@@ -6,6 +6,7 @@ import 'package:fyp1/add_sub_category.dart';
 import 'package:fyp1/service/api_service.dart';
 import 'package:fyp1/service/models/all_sub_category_model.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:fyp1/weather/dynamicdetailsubcat.dart';
 import 'package:image_picker/image_picker.dart';
 
 class DynamicSubCatScreen extends StatefulWidget {
@@ -242,9 +243,10 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                                 // Navigate to AlphabetsScreen when the container is tapped
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => DynamicSubCatScreen(
+                                    builder: (context) => DynamicDetailSubCat(
                                       name: '${datacat[index].name}',
-                                      id: '${datacat[index].id}',
+                                      audio: '${datacat[index].audio}',
+                                      image: '${datacat[index].image}',
                                     ),
                                   ),
                                 );
@@ -259,7 +261,7 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                                     cardColor: Color(0xFF9867C5),
                                     borderRadius: BorderRadius.circular(25),
                                     imageAssetPath:
-                                        'assets/images/weather/1.png',
+                                        '${datacat[index].image}',
                                     imageWidth: 60,
                                     imageHeight: 80,
                                   ),
@@ -310,7 +312,7 @@ class CardBoxWithImage extends StatelessWidget {
           height: 100,
           child: Center(
             child: imageAssetPath != null
-                ? Image.asset(
+                ? Image.network(
                     imageAssetPath!,
                     width: imageWidth,
                     height: imageHeight,

@@ -1,19 +1,14 @@
 class UserModel {
   bool? success;
   String? message;
-  List<User>? data;
+  User? data;
 
   UserModel({this.success, this.message, this.data});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     message = json['message'];
-    if (json['data'] != null) {
-      data = <User>[];
-      json['data'].forEach((v) {
-        data!.add(new User.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? new User.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -21,7 +16,7 @@ class UserModel {
     data['success'] = this.success;
     data['message'] = this.message;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
@@ -31,7 +26,7 @@ class User {
   int? id;
   String? firstname;
   String? email;
-  String? emailVerifiedAt;
+  Null? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
   String? gender;

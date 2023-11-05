@@ -18,7 +18,7 @@ class Prefs {
     await preferences.clear();
   }
 
-  Future setUser(User user) {
+  Future setUser(User? user) {
     return PreferencesHelper.setString("user", json.encode(user));
   }
 
@@ -32,5 +32,7 @@ class Prefs {
 
   setAuthToken(String token) async {
     PreferencesHelper.setString('Auth_Token', token);
+  }setname(String name) async {
+    PreferencesHelper.setString('username', name);
   }
 }

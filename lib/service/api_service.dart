@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:fyp1/utils/preferencedata.dart';
 import 'package:http/http.dart' as http;
 
 class API {
@@ -22,7 +23,7 @@ class API {
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(data));
       debugPrint("$data");
-      debugPrint("{response.body}");
+      debugPrint("${response.body}");
       return response;
     } catch (e) {
       // onError("${e}");
@@ -60,28 +61,19 @@ class API {
       // return onError(e, "login/Users/login");
     }
   }
-
-  static Future ActiveCourseApi(courseid) async {
+  static Future Userdata(bearertoken) async {
     try {
-      var url = Uri.parse("${baseurl}api/showall");
-      var response = await http.get(
-        url,
-        headers: {
-          // 'Authorization': BaseUrl.storage.read("logintoken"),
-        },
+      final response = await http.get(
+        Uri.parse('${baseurl}api/user-detail'),
+        headers: {'Authorization': "Bearer $bearertoken"},
       );
-      debugPrint("$url");
-      debugPrint("${courseid}");
+
       return response;
     } catch (e) {
-      // onError("${e}");
-
       debugPrint("$e");
-      // return onError(e, "login/Users/login");
+      // onError("${e}");
     }
-  }
-
-  static Future logout(bearertoken) async {
+  }static Future logout(bearertoken) async {
     try {
       final response = await http.get(
         Uri.parse('${baseurl}api/logout'),
@@ -104,7 +96,7 @@ class API {
   }) async {
     try {
       Map data = {
-        "name": name,
+        "name": PreferencesHelperDataFetch.username,
         "category_name": categoryname,
         "user_id": 1,
         "question": question,

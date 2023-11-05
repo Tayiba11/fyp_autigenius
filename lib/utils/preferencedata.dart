@@ -13,6 +13,8 @@ class PreferencesHelperDataFetch {
   // static String? get authtoken => _preferences?.getString('user');
   // static set authtoken(String? value) => _preferences?.setString('user', value!);
   static String? get authtoken => _preferences?.getString('Auth_Token') ?? '';
+  static String? get username => _preferences?.getString('username') ?? '';
+  
   static String? get userdata => _preferences?.getString('user') ?? '';
    static User? userd= User.fromJson(json.decode("${userdata}"));
 
