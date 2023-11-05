@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fyp1/add_sub_category.dart';
 import 'package:fyp1/service/api_service.dart';
 import 'package:fyp1/service/models/all_sub_category_model.dart';
 
 import 'package:fyp1/weather/snowfall.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DynamicSubCatScreen extends StatefulWidget {
   final name;
@@ -18,16 +20,26 @@ class DynamicSubCatScreen extends StatefulWidget {
 class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
   var loading = 0;
   var datacat = [];
+  XFile? image;
+  Future getImagefromGallery() async {
+    image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      image = image;
+    });
+  }
+
   @override
   void initState() {
+    print("123456 abcbc ${widget.id}");
     // TODO: implement initState
-    getcatdata();
+    getcatdata(widget.id);
     super.initState();
   }
 
-  getcatdata() async {
+  getcatdata(id) async {
     print("object");
-    var response = await API.GetAllSubCategory();
+    var response = await API.GetAllSubCategory(id);
     if (response.statusCode == 200) {
       print(response);
       datacat = [];
@@ -87,6 +99,80 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                     ),
                   ),
                 ),
+                // if (datacat.length == 0) ...[
+                //   Row(
+                //     children: [
+                //       Container(child: GestureDetector(onTap: () {
+                //         getImagefromGallery().then((value) {
+                //           print(image!.path);
+                //           if (image != null) {
+                //             Navigator.push(
+                //               context,
+                //               MaterialPageRoute(
+                //                   builder: (context) => AddSubCategoryScreen(
+                //                         imagepath: image!.path,
+                //                       )),
+                //             );
+                //           } else {
+                //             Navigator.pop(context);
+                //           }
+                //         });
+                //       })),
+                //     ],
+                //   )
+                // ],
+                if (datacat.length == 0) ...[
+
+                  Row(
+                  mainAxisAlignment: MainAxisAlignment.start, // Align to the left
+                  children: [
+                    GestureDetector(onTap: () {
+                                  getImagefromGallery().then((value) {
+                                    print(image!.path);
+                                    if (image != null) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddSubCategoryScreen(
+                                                  imagepath: image!.path,
+                                                  catid:widget.id
+                                                )),
+                                      );
+                                    } else {
+                                      Navigator.pop(context);
+                                    }
+                                  });
+                                },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 25.0), // Add left padding
+                        child: Container(
+                          width: 140, // Adjust the width as needed
+                          height: 110,
+                          child: Card(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            elevation: 3,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            color: Color(0xFF9867C5),
+                            child: Container(
+                              width: 70, // Adjust the width of the inner container
+                              height: 50, // Adjust the height of the inner container
+                              child: Center(
+                                child: Icon(
+                                  Icons.add,
+                                  size: 36, // Adjust the size of the plus icon
+                                  color: Colors.white, // Set the color of the plus icon
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),],
                 Container(
                   width: MediaQuery.of(context).size.width * 0.85,
                   child: GridView.builder(
@@ -99,29 +185,48 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                         ),
                     itemCount: datacat.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return datacat.length == index + 1 || datacat == []
-                          ? Container(
-                              child: Container(
-                                margin: EdgeInsets.only(right: 10, left: 10),
-                                child: Card(
-                                  margin: EdgeInsets.symmetric(vertical: 10),
-                                  elevation: 3,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  color: Color(0xFF9867C5),
-                                  child: Container(
-                                    width:
-                                        70, // Adjust the width of the inner container
-                                    height:
-                                        50, // Adjust the height of the inner container
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.add,
-                                        size:
-                                            36, // Adjust the size of the plus icon
-                                        color: Colors
-                                            .white, // Set the color of the plus icon
+                      return datacat.length == index + 1 ? Container(
+                              child: GestureDetector(
+                                onTap: () {
+                                  getImagefromGallery().then((value) {
+                                    print(image!.path);
+                                    if (image != null) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddSubCategoryScreen(
+                                                  imagepath: image!.path,                                                  catid:widget.id
+
+                                                )),
+                                      );
+                                    } else {
+                                      Navigator.pop(context);
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 10, left: 10),
+                                  child: Card(
+                                    margin: EdgeInsets.symmetric(vertical: 10),
+                                    elevation: 3,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    color: Color(0xFF9867C5),
+                                    child: Container(
+                                      width:
+                                          70, // Adjust the width of the inner container
+                                      height:
+                                          50, // Adjust the height of the inner container
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.add,
+                                          size:
+                                              36, // Adjust the size of the plus icon
+                                          color: Colors
+                                              .white, // Set the color of the plus icon
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -162,7 +267,7 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                 ),
                 // Add your remaining widgets here
 
-                if(loading==0)...[CircularProgressIndicator()]
+                if (loading == 0) ...[CircularProgressIndicator()]
               ],
             ),
           ),

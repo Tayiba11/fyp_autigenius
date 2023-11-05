@@ -155,9 +155,9 @@ class API {
     }
   }
 
-  static Future GetAllSubCategory() async {
+  static Future GetAllSubCategory(id) async {
     try {
-      var url = Uri.parse("${baseurl}api/allsubcat");
+      var url = Uri.parse("${baseurl}api/singlesubcat/$id");
       var response = await http.get(
         url,
         headers: {},
@@ -170,7 +170,7 @@ class API {
   }
 
   static Future AddSubCat(
-      {var name, var photofile, var audio}) async {
+      {var name,var catid, var photofile, var audio}) async {
     try {
       //
       var uri =
@@ -179,6 +179,8 @@ class API {
       // request.headers["authorization"] = BaseUrl.storage.read("logintoken");
       request.fields['name'] = "$name";
       request.fields['user_id'] = "user_id";
+      request.fields['category_id'] = "$catid";
+      
       request.files.add(new http.MultipartFile.fromBytes(
           'image', File(photofile).readAsBytesSync(),
           filename: photofile.split("/").last));

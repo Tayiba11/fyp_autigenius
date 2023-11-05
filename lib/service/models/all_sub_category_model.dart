@@ -33,8 +33,15 @@ class Data {
   String? image;
   String? audio;
   String? userId;
+  String? categoryId;
 
-  Data({this.id, this.name, this.image, this.audio, this.userId});
+  Data(
+      {this.id,
+      this.name,
+      this.image,
+      this.audio,
+      this.userId,
+      this.categoryId});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -42,6 +49,7 @@ class Data {
     image = json['image'];
     audio = json['audio'];
     userId = json['user_id'];
+    categoryId = json['category_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +59,7 @@ class Data {
     data['image'] = this.image;
     data['audio'] = this.audio;
     data['user_id'] = this.userId;
+    data['category_id'] = this.categoryId;
     return data;
   }
 }
