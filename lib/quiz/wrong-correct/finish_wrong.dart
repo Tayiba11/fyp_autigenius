@@ -41,6 +41,12 @@ class   FinishWrongScreen extends StatelessWidget {
             SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
+Navigator.pop(context);
+Navigator.pop(context);
+Navigator.pop(context);
+Navigator.pop(context);
+Navigator.pop(context);
+Navigator.pop(context);
 
                 // Navigator.push(
                 //   context,
