@@ -24,6 +24,8 @@ class _FinishScreenState extends State<FinishScreen> {
   @override
   void initState() {
     super.initState();
+        savequiz() ;
+
   }
 
   savequiz() async {

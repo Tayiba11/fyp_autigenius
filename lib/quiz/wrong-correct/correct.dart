@@ -30,9 +30,11 @@ class _CorrectScreenState extends State<CorrectScreen> {
   @override
   void initState() {
     super.initState();
+        savequiz() ;
+
   }
 
-  savequiz() async {
+  savequiz() async {print("object");
     var response = await API.AddQuiz(
       name: "${widget.username}",
       categoryname: "${widget.catename}",

@@ -30,6 +30,7 @@ class _WrongScreenState extends State<WrongScreen> {
   @override
   void initState() {
     super.initState();
+    savequiz() ;
   }
 
   savequiz() async {

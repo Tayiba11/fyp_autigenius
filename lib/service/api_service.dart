@@ -48,7 +48,7 @@ class API {
         "first_name": firstname,
         "gender": "male"
       };
-      final response = await http.post(Uri.parse('${baseurl}api/regiter'),
+      final response = await http.post(Uri.parse('${baseurl}api/register'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(data));
       debugPrint("$data");
@@ -107,21 +107,23 @@ class API {
       Map data = {
         "name": name,
         "category_name": categoryname,
-        "user_id": PreferencesHelperDataFetch.authtoken,
+        "user_id": 1,
         "question": question,
         "answer": answer,
         "status": status
       };
-      final response = await http.post(Uri.parse('${baseurl}api/regiter'),
+      final response = await http.post(Uri.parse('${baseurl}api/addquiz'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(data));
       debugPrint("$data");
-      debugPrint("{response.body}");
+      debugPrint("${response.body}");
+            print("$response");
+
       return response;
     } catch (e) {
       // onError("${e}");
 
-      debugPrint("$e");
+      print("$e");
       // return onError(e, "login/Users/login");
     }
   }
