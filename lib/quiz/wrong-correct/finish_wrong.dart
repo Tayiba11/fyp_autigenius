@@ -1,7 +1,10 @@
 
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class   FinishWrongScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:fyp1/service/api_service.dart';
+
+class   FinishWrongScreen extends StatefulWidget {
   final buttonfuncnext;
   final username;
   final catename;
@@ -12,6 +15,43 @@ class   FinishWrongScreen extends StatelessWidget {
   const  FinishWrongScreen(
       {super.key, required this.buttonfuncnext, required this.username,required  this.catename,required  this.question,required  this.answer,required  this.status});
 
+  @override
+  State<FinishWrongScreen> createState() => _FinishWrongScreenState();
+}
+
+class _FinishWrongScreenState extends State<FinishWrongScreen> {
+    var loading = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  savequiz() async {
+    var response = await API.AddQuiz(
+      name: "${widget.username}",
+      categoryname: "${widget.catename}",
+      question: "${widget.question}",
+      answer: "${widget.answer}",
+      status: "${widget.status}",
+    );
+    if (response.statusCode == 200) {
+      response = jsonDecode(response.body);
+
+      if (response['statusCode'] == '200') {
+        setState(() {
+          loading = 1;
+        });
+      } else {
+        setState(() {
+          loading = 1;
+        });
+      }
+    } else {
+      setState(() {
+        loading = 1;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
   return Scaffold(
@@ -38,7 +78,16 @@ class   FinishWrongScreen extends StatelessWidget {
               'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDlsNzdnMGZ6cDNnM3JqeTV3eXpvZmRwN3ZudmFzYmI0cWI1YzMyNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgEYXCNqPZnqMuY/giphy.gif',
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 50),
+             if(loading==0)...[
+                   Text(
+              "Saving Answer",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+              ],SizedBox(height: 50),
             ElevatedButton(
               onPressed: () {
 Navigator.pop(context);
