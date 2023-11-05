@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fyp1/add_sub_category.dart';
 import 'package:fyp1/service/api_service.dart';
 import 'package:fyp1/service/models/all_sub_category_model.dart';
-// ignore: depend_on_referenced_packages
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -28,23 +28,6 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
       image = image;
     });
   }
-  File? audioFile;
-
-Future pickAudio() async {
-  try {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['mp3', 'wav', 'aac', 'm4a'], // Specify the audio file formats you want to allow
-    );
-
-    if (result != null) {
-      audioFile = File(result.files.single.path);
-    }
-  } catch (e) {
-    print("Error picking audio: $e");
-  }
-}
-
   @override
   void initState() {
     print("123456 abcbc ${widget.id}");

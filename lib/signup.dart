@@ -1,52 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fyp1/service/api_service.dart';
 import 'welcome_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
 
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
 
-
-class SignUpPage extends StatelessWidget {
+class _SignUpPageState extends State<SignUpPage> {
   TextEditingController firstName = TextEditingController();
+
   TextEditingController lastName = TextEditingController();
+
   TextEditingController email = TextEditingController();
+
   TextEditingController password = TextEditingController();
 
-  Future<void> register(BuildContext context) async {
-    var url = Uri.http("https://autisticchildren.000webhostapp.com", '/register.php', {'q': '{http}'});
-    var response = await http.post(url, body: {
-      "first_name": firstName.text.toString(),
-      "last_name": lastName.text.toString(),
-      "email": email.text.toString(),
-      "password": password.text.toString(),
+  var loading = 0;
+
+  registeruser() async {
+    print("object");
+    setState(() {
+      loading = 1;
     });
-    var data = json.decode(response.body);
-    if (data == "error") {
-      Fluttertoast.showToast(
-        backgroundColor: Colors.orange,
-        textColor: Colors.white,
-        msg: 'User already exit!',
-        toastLength: Toast.LENGTH_SHORT,
-      );
+    var response = await API.Signup(
+      email: email.text,
+      password: password.text,
+      lastname: lastName.text,
+      firstname: firstName.text,
+    );
+
+    if (response.statusCode == 200) {
+      response = jsonDecode(response.body);
+      print(response['success']);
+      if (response['success'] == true) {
+        setState(() {
+          loading = 0;
+        });
+        const snackBar = SnackBar(
+          content: Text('User Created Login'),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Navigator.pop(context);
+      } else {
+        setState(() {
+          loading = 0;
+        });
+        const snackBar = SnackBar(
+          content: Text('Email or name already used'),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
     } else {
-      Fluttertoast.showToast(
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        msg: 'Registration Successful',
-        toastLength: Toast.LENGTH_SHORT,
+      setState(() {
+        loading = 0;
+      });
+      const snackBar = SnackBar(
+        content: Text('Something Went Wrong'),
       );
-      Navigator.push(context,
-        MaterialPageRoute(
-          builder: (context) => WelcomeScreen(),
-        ),
-      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
-  bool isPasswordVisible = false;
-  // }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,31 +181,46 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 30),
-                  Container(
-                    height: 58,
-                    width: 260,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to the WelcomeScreen
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => WelcomeScreen()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFA881AF),
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(fontSize: 22),
-                      ),
-                    ),
+                  loading == 1
+                      ? CircularProgressIndicator()
+                      : Container(
+                          height: 58,
+                          width: 260,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Navigate to the WelcomeScreen
 
-                  ),
+                              if (email.text != "" &&
+                                  password.text != "" &&
+                                  lastName.text != "" &&
+                                  firstName.text != "") {
+                                registeruser();
+                              } else {
+                                const snackBar = SnackBar(
+                                  content: Text('Fill All the Fields'),
+                                );
+
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                              // );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFA881AF),
+                              padding: EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(fontSize: 22),
+                            ),
+                          ),
+                        ),
                   SizedBox(height: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -209,22 +246,18 @@ class SignUpPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: () {
-                          
-                        },
+                        onTap: () {},
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
                           child: const FaIcon(
                             FontAwesomeIcons.google,
-                            color: const Color(0xFF4285F4), 
+                            color: const Color(0xFF4285F4),
                           ),
                         ),
                       ),
                       SizedBox(width: 10),
                       InkWell(
-                        onTap: () {
-                          
-                        },
+                        onTap: () {},
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
                           child: const FaIcon(
@@ -234,21 +267,17 @@ class SignUpPage extends StatelessWidget {
                       ),
                       SizedBox(width: 10),
                       InkWell(
-                        onTap: () {
-                          
-                        },
+                        onTap: () {},
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
                           child: const FaIcon(
                             FontAwesomeIcons.twitter,
-                            color: const Color(0xFF1DA1F2), 
+                            color: const Color(0xFF1DA1F2),
                           ),
                         ),
                       ),
                     ],
                   ),
-
-
                 ],
               ),
             ),

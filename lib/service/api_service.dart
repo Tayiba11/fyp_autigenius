@@ -43,8 +43,8 @@ class API {
         "email": email,
         "password": password,
         "confirm_password": password,
-        "last_name": lastname,
-        "first_name": firstname,
+        "lastname": lastname,
+        "firstname": firstname,
         "gender": "male"
       };
       final response = await http.post(Uri.parse('${baseurl}api/register'),
