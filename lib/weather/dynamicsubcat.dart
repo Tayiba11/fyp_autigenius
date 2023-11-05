@@ -1,22 +1,54 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:fyp1/weather/autumn.dart';
-import 'package:fyp1/weather/rain.dart';
+import 'package:fyp1/service/api_service.dart';
+import 'package:fyp1/service/models/all_sub_category_model.dart';
+
 import 'package:fyp1/weather/snowfall.dart';
-import 'package:fyp1/weather/summer.dart';
-import 'package:fyp1/weather/thunderstorm.dart';
-import 'package:fyp1/weather/tornado.dart';
-import 'package:fyp1/weather/volcanoblast.dart';
 
 class DynamicSubCatScreen extends StatefulWidget {
-
-final name;
-final id;
-  @override  const DynamicSubCatScreen({super.key,required this .name,required this.id});
+  final name;
+  final id;
+  @override
+  const DynamicSubCatScreen({super.key, required this.name, required this.id});
 
   State<DynamicSubCatScreen> createState() => _DynamicSubCatScreenState();
 }
 
 class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
+  var loading = 0;
+  var datacat = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    getcatdata();
+    super.initState();
+  }
+
+  getcatdata() async {
+    print("object");
+    var response = await API.GetAllSubCategory();
+    if (response.statusCode == 200) {
+      print(response);
+      datacat = [];
+      // debugPrint('before model $response');
+      var responseData = jsonDecode(response.body);
+      response = AllSubCategoryModel.fromJson(responseData);
+      for (int i = 0; i < response.data.length; i++) {
+        datacat.add(response.data[i]);
+        print(i);
+      }
+      datacat.add(response.data[response.data.length - 1]);
+      setState(() {
+        loading = 1;
+      });
+    } else {
+      setState(() {
+        loading = 1;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,55 +87,80 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                     ),
                   ),
                 ),
-
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Number of items in each row
+                        childAspectRatio:
+                            1.5 // Adjust this value as needed to control the aspect ratio
+                        ),
+                    itemCount: datacat.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return datacat.length == index + 1 || datacat == []
+                          ? Container(
+                              child: Container(
+                                margin: EdgeInsets.only(right: 10, left: 10),
+                                child: Card(
+                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                  elevation: 3,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  color: Color(0xFF9867C5),
+                                  child: Container(
+                                    width:
+                                        70, // Adjust the width of the inner container
+                                    height:
+                                        50, // Adjust the height of the inner container
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.add,
+                                        size:
+                                            36, // Adjust the size of the plus icon
+                                        color: Colors
+                                            .white, // Set the color of the plus icon
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : GestureDetector(
+                              onTap: () {
+                                // Navigate to AlphabetsScreen when the container is tapped
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => DynamicSubCatScreen(
+                                      name: '${datacat[index].name}',
+                                      id: '${datacat[index].id}',
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(right: 10, left: 10),
+                                // height: 170,
+                                // width: 280,
+                                child: Container(
+                                  // width: 140,
+                                  child: CardBoxWithImage(
+                                    cardColor: Color(0xFF9867C5),
+                                    borderRadius: BorderRadius.circular(25),
+                                    imageAssetPath:
+                                        'assets/images/weather/1.png',
+                                    imageWidth: 60,
+                                    imageHeight: 80,
+                                  ),
+                                ),
+                              ),
+                            );
+                    },
+                  ),
+                ),
                 // Add your remaining widgets here
-                SizedBox(height: 20),
-                // Create a row with two containers containing CardBoxWithImage widgets
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to AlphabetsScreen when the container is tapped
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => thunderstormScreen(), // Navigate to AlphabetsScreen
-                          ),
-                        );
-                      },
-                    child: Container(
-                      width: 140, // Adjust the width as needed
-                      child: CardBoxWithImage(
-                        cardColor: Color(0xFF9867C5),
-                        borderRadius: BorderRadius.circular(25),
-                        imageAssetPath: 'assets/images/weather/1.png',
-                        imageWidth: 60,
-                        imageHeight: 80,
-                      ),
-                    ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to AlphabetsScreen when the container is tapped
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => volcanoBlastScreen(), // Navigate to AlphabetsScreen
-                          ),
-                        );
-                      },
-                    child: Container(
-                      width: 140, // Adjust the width as needed
-                      child: CardBoxWithImage(
-                        cardColor: Color(0xFF9867C5),
-                        borderRadius: BorderRadius.circular(25),
-                        imageAssetPath: 'assets/images/weather/2.png',
-                        imageWidth: 60,
-                        imageHeight: 80,
-                      ),
-                    ),
-                    ),
-                  ],
-                ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -113,139 +170,24 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
                         // Navigate to AlphabetsScreen when the container is tapped
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => tornadoScreen(), // Navigate to AlphabetsScreen
+                            builder: (context) =>
+                                snowfallScreen(), // Navigate to AlphabetsScreen
                           ),
                         );
                       },
-                    child: Container(
-                      width: 140, // Adjust the width as needed
-                      child: CardBoxWithImage(
-                        cardColor: Color(0xFF9867C5),
-                        borderRadius: BorderRadius.circular(25),
-                        imageAssetPath: 'assets/images/weather/5.png',
-                        imageWidth: 60,
-                        imageHeight: 80,
-                      ),
-                    ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to AlphabetsScreen when the container is tapped
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => autumnScreen(), // Navigate to AlphabetsScreen
-                          ),
-                        );
-                      },
-                    child: Container(
-                      width: 140, // Adjust the width as needed
-                      child: CardBoxWithImage(
-                        cardColor: Color(0xFF9867C5),
-                        borderRadius: BorderRadius.circular(25),
-                        imageAssetPath: 'assets/images/weather/6.png',
-                        imageWidth: 60,
-                        imageHeight: 80,
-                      ),
-                    ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to AlphabetsScreen when the container is tapped
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => rainScreen(), // Navigate to AlphabetsScreen
-                          ),
-                        );
-                      },
-                    child: Container(
-                      width: 140, // Adjust the width as needed
-                      child: CardBoxWithImage(
-                        cardColor: Color(0xFF9867C5),
-                        borderRadius: BorderRadius.circular(25),
-                        imageAssetPath: 'assets/images/weather/7.png',
-                        imageWidth: 60,
-                        imageHeight: 80,
-                      ),
-                    ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to AlphabetsScreen when the container is tapped
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => summerScreen(), // Navigate to AlphabetsScreen
-                          ),
-                        );
-                      },
-                    child: Container(
-                      width: 140, // Adjust the width as needed
-                      child: CardBoxWithImage(
-                        cardColor: Color(0xFF9867C5),
-                        borderRadius: BorderRadius.circular(25),
-                        imageAssetPath: 'assets/images/weather/8.png',
-                        imageWidth: 60,
-                        imageHeight: 80,
-                      ),
-                    ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to AlphabetsScreen when the container is tapped
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => snowfallScreen(), // Navigate to AlphabetsScreen
-                          ),
-                        );
-                      },
-                    child: Container(
-                      width: 140, // Adjust the width as needed
-                      child: CardBoxWithImage(
-                        cardColor: Color(0xFF9867C5),
-                        borderRadius: BorderRadius.circular(25),
-                        imageAssetPath: 'assets/images/weather/9.png',
-                        imageWidth: 60,
-                        imageHeight: 80,
-                      ),
-                    ),
-                    ),
-                    Container(
-                      width: 140, // Adjust the width as needed
-                      height: 110,
-                      child: Card(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
+                      child: Container(
+                        width: 140, // Adjust the width as needed
+                        child: CardBoxWithImage(
+                          cardColor: Color(0xFF9867C5),
                           borderRadius: BorderRadius.circular(25),
-                        ),
-                        color: Color(0xFF9867C5),
-                        child: Container(
-                          width: 70, // Adjust the width of the inner container
-                          height: 50, // Adjust the height of the inner container
-                          child: Center(
-                            child: Icon(
-                              Icons.add,
-                              size: 36, // Adjust the size of the plus icon
-                              color: Colors.white, // Set the color of the plus icon
-                            ),
-                          ),
+                          imageAssetPath: 'assets/images/weather/9.png',
+                          imageWidth: 60,
+                          imageHeight: 80,
                         ),
                       ),
                     ),
                   ],
                 ),
-
-
-
               ],
             ),
           ),
@@ -254,7 +196,6 @@ class _DynamicSubCatScreenState extends State<DynamicSubCatScreen> {
     );
   }
 }
-
 
 class CardBoxWithImage extends StatelessWidget {
   final Color cardColor;
@@ -286,11 +227,11 @@ class CardBoxWithImage extends StatelessWidget {
           child: Center(
             child: imageAssetPath != null
                 ? Image.asset(
-              imageAssetPath!,
-              width: imageWidth,
-              height: imageHeight,
-              fit: BoxFit.cover,
-            )
+                    imageAssetPath!,
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: BoxFit.cover,
+                  )
                 : Placeholder(),
           ),
         ),
